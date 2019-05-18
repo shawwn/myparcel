@@ -25749,6 +25749,7 @@ if ("development" === 'production') {
   module.exports = require('./cjs/react-dom.development.js');
 }
 },{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"index.js":[function(require,module,exports) {
+var global = arguments[3];
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -25767,9 +25768,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -25781,9 +25782,13 @@ function (_React$Component) {
   _inherits(Probe, _React$Component);
 
   function Probe(props) {
+    var _this;
+
     _classCallCheck(this, Probe);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Probe).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Probe).call(this, props));
+    global.probe1 = _assertThisInitialized(_this);
+    return _this;
   }
 
   _createClass(Probe, [{
@@ -25814,10 +25819,17 @@ function (_React$Component2) {
   _inherits(Btn, _React$Component2);
 
   function Btn(props) {
+    var _this2;
+
     _classCallCheck(this, Btn);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Btn).call(this, props)); // This binding is necessary to make `this` work in the callback
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Btn).call(this, props));
+    global.btn1 = _assertThisInitialized(_this2);
+    window.React = _react.default;
+    window.ReactDOM = _reactDom.default; // This binding is necessary to make `this` work in the callback
     //this.handleClick = this.handleClick.bind(this);
+
+    return _this2;
   }
 
   _createClass(Btn, [{
@@ -25833,13 +25845,14 @@ function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this3 = this;
 
       return this.props.hidden ? null : _react.default.createElement("div", null, _react.default.createElement(Probe, null), _react.default.createElement("button", {
+        id: "btn",
         onClick: function onClick() {
-          console.log('clickedd!');
+          console.log('clickedd!!');
 
-          _this.props.onClick();
+          _this3.props.onClick();
         }
       }, "Woo ", this.props.count || 0));
     }
@@ -25854,33 +25867,34 @@ function (_React$Component3) {
   _inherits(App, _React$Component3);
 
   function App(props) {
-    var _this2;
+    var _this4;
 
     _classCallCheck(this, App);
 
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this2.state = {
+    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    global.app1 = _assertThisInitialized(_this4);
+    _this4.state = {
       count: 0
     };
-    _this2.interval = setInterval(function () {
-      _this2.setState({
-        count: _this2.state.count + 1
+    _this4.interval = setInterval(function () {
+      _this4.setState({
+        count: _this4.state.count + 1
       });
     }, 1000);
-    return _this2;
+    return _this4;
   }
 
   _createClass(App, [{
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this5 = this;
 
       return _react.default.createElement("div", null, "Hello ", this.props.name, " ", _react.default.createElement(Btn, {
         hidden: this.state.count % 10 >= 5,
         count: this.state.count,
         onClick: function onClick() {
-          _this3.setState({
-            count: _this3.state.count + 1
+          _this5.setState({
+            count: _this5.state.count + 1
           });
         }
       }));

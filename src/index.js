@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 class Probe extends React.Component {
   constructor(props) {
     super(props);
+    global.probe1 = this;
   }
 
   componentWillMount() {
@@ -23,6 +24,9 @@ class Probe extends React.Component {
 class Btn extends React.Component {
   constructor(props) {
     super(props);
+    global.btn1 = this;
+    window.React = React;
+    window.ReactDOM = ReactDOM;
 
     // This binding is necessary to make `this` work in the callback
     //this.handleClick = this.handleClick.bind(this);
@@ -41,8 +45,8 @@ class Btn extends React.Component {
        (
         <div>
           <Probe />
-          <button onClick={(() => {
-            console.log('clickedd!');
+          <button id="btn" onClick={(() => {
+            console.log('clickedd!!');
             this.props.onClick();
           })}>
             Woo {this.props.count || 0}
@@ -55,6 +59,7 @@ class Btn extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
+    global.app1 = this;
     this.state = {count: 0};
     this.interval = setInterval(() => {
       this.setState({count: this.state.count + 1});
